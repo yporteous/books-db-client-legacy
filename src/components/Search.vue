@@ -1,7 +1,7 @@
 <template>
   <div class='search-bar'>
-    <div class='nav-button'>Home</div>
-    <div class='nav-button'>Bookshelf</div>
+    <div class='nav-button' @click="$router.push({ name: 'Summary' })">Home</div>
+    <div class='nav-button' @click="$router.push({ name: 'Bookshelf' })">Bookshelf</div>
     <div class='nav-button search'>
       <input class='search-box' type='text' placeholder='Search...' v-model="searchQuery">
     </div>
@@ -38,6 +38,11 @@ export default {
   height: 40px;
   line-height: 40px;
   text-align: center;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */
+  cursor: pointer;
 }
 .search {
   margin-left: auto;

@@ -6,13 +6,24 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'Summary',
   data () {
     return {
       user: 'user',
-      nBooks: '362'
+      nBooks: ''
     }
+  },
+  mounted () {
+    axios
+      .get('http://localhost:3000/books')
+      .then(res => {
+        this.nBooks = res.data.length.toString()
+      }, e => {
+        console.log(e)
+      })
   }
 }
 </script>

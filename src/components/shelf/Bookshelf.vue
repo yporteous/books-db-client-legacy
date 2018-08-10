@@ -1,6 +1,6 @@
 <template>
   <div class='bookshelf'>
-    <Book v-for='book of books' v-bind='book' :key='book._id'/>
+    <Book v-for='book of filteredBooks' v-bind='book' :key='book._id'/>
   </div>
 </template>
 
@@ -17,6 +17,21 @@ export default {
   data () {
     return {
       books: []
+    }
+  },
+  computed: {
+    filteredBooks () {
+      if (this.$store.state.searchQuery) {
+        let re = new RegExp(
+          this.$store.state.searchQuery
+            .toLowerCase()
+            .replace(/ /g, '(.*?)')
+            .replace(/-/g, '(.*?)')
+        )
+        return this.books.filter(book => Object.values(book).join(' ').toLowerCase().match(re))
+      } else {
+        return this.books
+      }
     }
   },
   mounted () {

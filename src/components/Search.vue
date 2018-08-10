@@ -2,13 +2,25 @@
   <div class='search-bar'>
     <div class='nav-button'>Home</div>
     <div class='nav-button'>Bookshelf</div>
-    <div class='nav-button search'><input class='search-box' type='text' placeholder='Search...'></div>
+    <div class='nav-button search'>
+      <input class='search-box' type='text' placeholder='Search...' v-model="searchQuery">
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Search'
+  name: 'Search',
+  computed: {
+    searchQuery: {
+      get () {
+        return this.$store.state.searchQuery
+      },
+      set (q) {
+        this.$store.commit('setSearchQuery', q)
+      }
+    }
+  }
 }
 </script>
 

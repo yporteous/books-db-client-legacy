@@ -3,7 +3,6 @@
     <div class='summary'>
       <div class='book-title'>{{title}}</div>
       <div class='book-author'>{{author}}</div>
-      <div class='book-id'>{{_id}}</div>
     </div>
     <div class='info-button' @click="bookInfoPage">&#x24d8;</div>
   </div>
@@ -34,6 +33,7 @@ h1, h2 {
   padding: 10px;
   display: inline-block;
   vertical-align: top;
+  background-color: #ccc;
 }
 .summary {
   height: 180px;
@@ -52,5 +52,6 @@ h1, h2 {
 }
 .info-button {
   cursor: pointer;
+  text-align: right;
 }
 </style>

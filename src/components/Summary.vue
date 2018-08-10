@@ -1,6 +1,7 @@
 <template>
   <div class='summary'>
     <p>Hello, {{user}}. You have {{nBooks}} books in your library.</p>
+    <router-link to='books'>View Library</router-link>
   </div>
 </template>
 
@@ -9,7 +10,7 @@ export default {
   name: 'Summary',
   data () {
     return {
-      user: '',
+      user: 'user',
       nBooks: '362'
     }
   }

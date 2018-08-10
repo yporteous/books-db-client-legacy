@@ -1,18 +1,23 @@
 <template>
   <div class='book'>
-    <div class='book-title'>{{title}}</div>
-    <div class='book-author'>{{author}}</div>
-    <div class='book-id'>{{_id}}</div>
-    <router-link class='book-info-link' :to="{ name: 'Book', params: {'bookId': _id} }">
-      <div>&#x24d8;</div>
-    </router-link>
+    <div class='summary'>
+      <div class='book-title'>{{title}}</div>
+      <div class='book-author'>{{author}}</div>
+      <div class='book-id'>{{_id}}</div>
+    </div>
+    <div class='info-button' @click="bookInfoPage">&#x24d8;</div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Book',
-  props: ['title', 'author', '_id']
+  props: ['title', 'author', '_id'],
+  methods: {
+    bookInfoPage () {
+      this.$router.push({ name: 'Book', params: {'bookId': this._id} })
+    }
+  }
 }
 </script>
 
@@ -30,7 +35,10 @@ h1, h2 {
   display: inline-block;
   vertical-align: top;
 }
-.book>div {
+.summary {
+  height: 180px;
+}
+.summary>div {
   margin-bottom: 3px;
 }
 .book-title {
@@ -42,8 +50,7 @@ h1, h2 {
 .book-id {
   font-size: 8px;
 }
-.book-info-link {
-  text-decoration: none;
-  color: black;
+.info-button {
+  cursor: pointer;
 }
 </style>

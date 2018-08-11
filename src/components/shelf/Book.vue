@@ -4,7 +4,10 @@
       <div class='book-title'>{{title}}</div>
       <div class='book-author'>{{author}}</div>
     </div>
-    <div class='info-button' @click="bookInfoPage">&#x24d8;</div>
+    <div class='footer'>
+      <span class='info-button' @click="bookInfoPage">&#x24d8;</span>
+    </div>
+
   </div>
 </template>
 
@@ -26,8 +29,9 @@ h1, h2 {
   font-weight: normal;
 }
 .book {
-  width: 130px;
-  height: 200px;
+  box-sizing: border-box;
+  width: 150px;
+  height: 220px;
   border: 1px solid #888;
   margin: 10px 20px;
   padding: 10px;
@@ -50,8 +54,11 @@ h1, h2 {
 .book-id {
   font-size: 8px;
 }
+.footer {
+  height: auto;
+  text-align: right;
+}
 .info-button {
   cursor: pointer;
-  text-align: right;
 }
 </style>

@@ -7,29 +7,17 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import axios from 'axios'
-
 export default {
   name: 'SummarySidebar',
-  data () {
-    return {
-      dataItems: {
+  computed: {
+    dataItems () {
+      return {
         nBooks: {
           text: 'Books',
-          val: ''
+          val: this.$store.state.books.length
         }
       }
     }
-  },
-  mounted () {
-    axios
-      .get('http://localhost:3000/books')
-      .then(res => {
-        Vue.set(this.dataItems.nBooks, 'val', res.data.length.toString())
-      }, e => {
-        console.log(e)
-      })
   }
 }
 </script>

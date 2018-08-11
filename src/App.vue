@@ -16,7 +16,7 @@ export default {
     Search
   },
   mounted () {
-    this.$store.commit('getBookList')
+    this.$store.commit('refreshBookList')
   }
 }
 </script>

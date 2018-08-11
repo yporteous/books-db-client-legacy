@@ -7,7 +7,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     searchQuery: '',
-    books: []
+    books: [],
+    shelves: []
   },
   actions: {
 
@@ -16,7 +17,7 @@ export default new Vuex.Store({
     setSearchQuery (state, q) {
       state.searchQuery = q
     },
-    getBookList (state) {
+    refreshBookList (state) {
       axios.get('http://localhost:3000/books').then(res => {
         state.books = res.data
       }, e => {

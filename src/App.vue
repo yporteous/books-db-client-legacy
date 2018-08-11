@@ -6,12 +6,17 @@
 </template>
 
 <script>
+// import axios from 'axios'
+
 import Search from './components/Search'
 
 export default {
   name: 'App',
   components: {
     Search
+  },
+  mounted () {
+    this.$store.commit('getBookList')
   }
 }
 </script>

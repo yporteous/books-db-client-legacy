@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import _ from 'lodash'
 
 import Book from './Book'
 
@@ -16,7 +16,7 @@ export default {
   },
   data () {
     return {
-      books: []
+      shelf: 'Science Fiction'
     }
   },
   computed: {
@@ -28,20 +28,13 @@ export default {
             .replace(/ /g, '(.*?)')
             .replace(/-/g, '(.*?)')
         )
-        return this.books.filter(book => Object.values(book).join(' ').toLowerCase().match(re))
+        return this.$store.state.books
+          .filter(book => book.shelf === this.shelf)
+          .filter(book => _.omit(Object.values(book), ['shelf']).join(' ').toLowerCase().match(re))
       } else {
-        return this.books
+        return this.$store.state.books.filter(book => book.shelf === this.shelf)
       }
     }
-  },
-  mounted () {
-    axios
-      .get('http://localhost:3000/books')
-      .then(res => {
-        this.books = res.data
-      }, e => {
-        console.log(e)
-      })
   }
 }
 </script>

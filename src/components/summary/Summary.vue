@@ -9,8 +9,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 import SummarySidebar from './SummarySidebar'
 
 export default {
@@ -23,15 +21,6 @@ export default {
       user: 'user',
       nBooks: ''
     }
-  },
-  mounted () {
-    axios
-      .get('http://localhost:3000/books')
-      .then(res => {
-        this.nBooks = res.data.length.toString()
-      }, e => {
-        console.log(e)
-      })
   }
 }
 </script>

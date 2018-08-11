@@ -1,15 +1,23 @@
 <template>
   <div class='summary'>
-    <p>Hello, {{user}}. You have {{nBooks}} books in your library.</p>
-    <router-link to='books'>View Library</router-link>
+    <SummarySidebar/>
+    <div class='summary-main'>
+      <p>Hello, {{user}}.</p>
+      <router-link to='books'>View Library</router-link>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 
+import SummarySidebar from './SummarySidebar'
+
 export default {
   name: 'Summary',
+  components: {
+    SummarySidebar
+  },
   data () {
     return {
       user: 'user',
@@ -30,5 +38,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.summary {
+}
+.summary-main {
+  /* flex-grow: 1; */
+  margin-left: 200px;
+  padding-left: 20px;
+}
 </style>

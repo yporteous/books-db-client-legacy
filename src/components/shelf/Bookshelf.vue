@@ -30,10 +30,10 @@ export default {
             .replace(/-/g, '(.*?)')
         )
         return this.$store.state.books
-          .filter(book => book.shelf === this.shelf)
+          .filter(book => this.shelf === 'All' || book.shelf === this.shelf)
           .filter(book => Object.values(_.omit(book, ['_id', 'shelf'])).join(' ').toLowerCase().match(re))
       } else {
-        return this.$store.state.books.filter(book => book.shelf === this.shelf)
+        return this.$store.state.books.filter(book => this.shelf === 'All' || book.shelf === this.shelf)
       }
     }
   }

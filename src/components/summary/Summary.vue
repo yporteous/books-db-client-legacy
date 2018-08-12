@@ -2,19 +2,21 @@
   <div class='summary'>
     <SummarySidebar/>
     <div class='summary-main'>
-      <h3>Your Library</h3>
-      <router-link to='bookshelf/Science_Fiction'>View Library</router-link>
+      <h2>Your Bookshelves</h2>
+      <ShelfLink v-for='shelf of shelves' :key='shelf' :name='shelf'/>
     </div>
   </div>
 </template>
 
 <script>
 import SummarySidebar from './SummarySidebar'
+import ShelfLink from './ShelfLink'
 
 export default {
   name: 'Summary',
   components: {
-    SummarySidebar
+    SummarySidebar,
+    ShelfLink
   },
   data () {
     return {

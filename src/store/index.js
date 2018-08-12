@@ -13,12 +13,16 @@ export default new Vuex.Store({
       'Science Fiction',
       'STEM',
       'Fiction'
-    ]
+    ],
+    currentShelf: 'All'
   },
   actions: {
 
   },
   mutations: {
+    setCurrentShelf (state, shelf) {
+      state.currentShelf = shelf
+    },
     setSearchQuery (state, q) {
       state.searchQuery = q
     },

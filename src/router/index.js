@@ -5,6 +5,7 @@ import Summary from '@/components/summary/Summary'
 import Bookshelf from '@/components/shelf/Bookshelf'
 import BookInfo from '@/components/bookInfo/BookInfo'
 import AddBook from '@/components/addNew/AddBook'
+import EditBook from '@/components/addNew/EditBook'
 
 Vue.use(Router)
 
@@ -30,6 +31,11 @@ export default new Router({
       path: '/book/:bookId',
       name: 'Book',
       component: BookInfo
+    },
+    {
+      path: '/book/edit/:bookId',
+      name: 'Edit Book',
+      component: EditBook
     }
   ]
 })

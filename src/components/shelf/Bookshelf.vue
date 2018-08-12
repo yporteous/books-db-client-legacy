@@ -36,6 +36,9 @@ export default {
         return this.$store.state.books.filter(book => this.shelf === 'All' || book.shelf === this.shelf)
       }
     }
+  },
+  mounted () {
+    this.$store.commit('setCurrentShelf', this.$route.params.shelfName)
   }
 }
 </script>

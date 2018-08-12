@@ -3,8 +3,7 @@
     <SummarySidebar/>
     <div class='summary-main'>
       <h3>Your Library</h3>
-      <!-- <p>Hello, {{user}}.</p> -->
-      <router-link to='books'>View Library</router-link>
+      <router-link to='bookshelf/Science_Fiction'>View Library</router-link>
     </div>
   </div>
 </template>
@@ -19,8 +18,12 @@ export default {
   },
   data () {
     return {
-      user: 'user',
-      nBooks: ''
+      user: 'user'
+    }
+  },
+  computed: {
+    shelves () {
+      return this.$store.state.shelves
     }
   }
 }

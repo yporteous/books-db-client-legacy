@@ -15,7 +15,7 @@ export default new Router({
       component: Summary
     },
     {
-      path: '/books',
+      path: '/bookshelf/:shelfName',
       name: 'Bookshelf',
       component: Bookshelf
     },

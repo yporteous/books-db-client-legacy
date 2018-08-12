@@ -15,22 +15,23 @@ export default {
     Book
   },
   data () {
-    return {
-      shelf: 'Science Fiction'
-    }
+    return {}
   },
   computed: {
+    shelf () {
+      return this.$route.params.shelfName.replace(/_/g, ' ')
+    },
     filteredBooks () {
       if (this.$store.state.searchQuery) {
         let re = new RegExp(
-          this.$store.state.searchQuery
+          '\\b' + this.$store.state.searchQuery
             .toLowerCase()
             .replace(/ /g, '(.*?)')
             .replace(/-/g, '(.*?)')
         )
         return this.$store.state.books
           .filter(book => book.shelf === this.shelf)
-          .filter(book => _.omit(Object.values(book), ['shelf']).join(' ').toLowerCase().match(re))
+          .filter(book => Object.values(_.omit(book, ['_id', 'shelf'])).join(' ').toLowerCase().match(re))
       } else {
         return this.$store.state.books.filter(book => book.shelf === this.shelf)
       }

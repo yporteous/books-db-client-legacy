@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: {
     searchQuery: '',
     books: [],
-    shelves: []
+    shelves: ['Science Fiction']
   },
   actions: {
 

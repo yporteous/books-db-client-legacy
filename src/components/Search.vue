@@ -1,7 +1,7 @@
 <template>
   <div class='search-bar'>
     <div class='nav-button' @click="$router.push({ name: 'Summary' })">Home</div>
-    <div class='nav-button' @click="$router.push({ name: 'Bookshelf' })">Bookshelf</div>
+    <!-- <div class='nav-button' @click="$router.push({ name: 'Bookshelf' })">Bookshelf</div> -->
     <div class='nav-button search'>
       <input class='search-box' type='text' placeholder='Search...' v-model="searchQuery">
     </div>

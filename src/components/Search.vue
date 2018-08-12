@@ -1,8 +1,15 @@
 <template>
   <div class='search-bar'>
-    <div class='nav-button' @click="$router.push({ name: 'Summary' })">Home</div>
-    <!-- <div class='nav-button' @click="$router.push({ name: 'Bookshelf' })">Bookshelf</div> -->
-    <div class='nav-button search'>
+    <div class='nav-item nav-link' @click="$router.push({ name: 'Summary' })">Home</div>
+    <div class='nav-item nav-link' @mouseover="shelfList = true" @mouseleave="shelfList = false">
+      Bookshelves &#x25BE;
+      <div class='dropdown-content' :class="{'dropdown-show': shelfList}">
+        <div v-for='shelf of shelves' :key='shelf' class='nav-item dropdown-link' @click='goToShelf(shelf)'>
+          <span class='dropdown-text'>{{shelf}}</span>
+        </div>
+      </div>
+    </div>
+    <div class='nav-item nav-link search'>
       <input class='search-box' type='text' placeholder='Search...' v-model="searchQuery">
     </div>
   </div>
@@ -11,7 +18,23 @@
 <script>
 export default {
   name: 'Search',
+  data () {
+    return {
+      shelfList: false
+    }
+  },
+  methods: {
+    goToShelf (shelf) {
+      this.$router.push({
+        name: 'Bookshelf',
+        params: { shelfName: shelf.replace(/ /g, '_') }
+      })
+    }
+  },
   computed: {
+    shelves () {
+      return this.$store.state.shelves
+    },
     searchQuery: {
       get () {
         return this.$store.state.searchQuery
@@ -32,9 +55,8 @@ export default {
   text-align: left;
   display: flex;
 }
-.nav-button {
+.nav-item {
   display: inline-block;
-  width: 150px;
   height: 40px;
   line-height: 40px;
   text-align: center;
@@ -43,6 +65,23 @@ export default {
   -ms-user-select: none;      /* IE 10+ */
   user-select: none;          /* Likely future */
   cursor: pointer;
+}
+.nav-link {
+  width: 150px;
+}
+.nav-link:hover {
+  background-color: #777;
+}
+.dropdown-link {
+  background-color: #ccc;
+  display: block;
+}
+.dropdown-link:hover {
+  background-color: #999;
+}
+.dropdown-text {
+  display: block;
+  padding: 0 10px;
 }
 .search {
   margin-left: auto;
@@ -56,5 +95,17 @@ export default {
   margin: 7px 0;
   vertical-align: top;
   padding-left: 5px;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ccc;
+  width: auto;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropdown-show {
+  display: block;
 }
 </style>

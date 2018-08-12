@@ -1,5 +1,6 @@
 <template>
   <div class='sidebar'>
+    <h3>Statistics</h3>
     <div class='data-item' v-for='item of dataItems' :key='item.text'>
       {{item.text}}: {{item.val}}
     </div>
@@ -28,12 +29,17 @@ export default {
   box-sizing: border-box;
   width: 200px;
   height: 100%;
+  vertical-align: top;
 
   border-right: 2px solid #ccc;
   position: fixed;
   /* float: left; */
-  padding-top: 10px;
+  padding-left: 10px;
   display: flex;
   flex-flow: column nowrap;
+}
+
+h3 {
+  /* margin-top: 0 */
 }
 </style>

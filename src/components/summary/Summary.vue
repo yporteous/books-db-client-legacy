@@ -2,7 +2,8 @@
   <div class='summary'>
     <SummarySidebar/>
     <div class='summary-main'>
-      <p>Hello, {{user}}.</p>
+      <h3>Your Library</h3>
+      <!-- <p>Hello, {{user}}.</p> -->
       <router-link to='books'>View Library</router-link>
     </div>
   </div>
@@ -27,11 +28,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.summary {
-}
+.summary {}
 .summary-main {
-  /* flex-grow: 1; */
+  margin-top: 0;
   margin-left: 200px;
   padding-left: 20px;
+  position: fixed;
+}
+.summary-heading {
+  /* padding-top: 1px; */
 }
 </style>

@@ -102,6 +102,8 @@ export default {
   background-color: #ccc;
   width: auto;
   min-width: 150px;
+  max-height: 420px;
+  overflow-y: auto;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }

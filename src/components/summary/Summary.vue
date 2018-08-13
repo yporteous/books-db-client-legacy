@@ -8,7 +8,11 @@
         <div class='sym-plus' v-if='!showNewShelf'>+</div>
         <div class='new-shelf-fields' v-else>
           <input class='new-shelf-name' type='text' size='25' v-model='newShelfName'>
-          <button class='new-shelf-button' @click.stop='submitNew'>Add shelf</button>
+          <button
+            class='new-shelf-button'
+            @click.stop='submitNew'
+            :disabled='disallowSubmit'
+          >Add shelf</button>
           <button class='new-shelf-button' @click.stop='showNewShelf = false'>Cancel</button>
         </div>
       </div>
@@ -35,13 +39,22 @@ export default {
   computed: {
     shelves () {
       return this.$store.state.shelves
+    },
+    disallowSubmit () {
+      return !this.newShelfName.length
+        || this.shelves.indexOf(this.newShelfName.replace(/\b([a-z])/g, match => match.toUpperCase())) > -1
     }
   },
   methods: {
     submitNew () {
-      this.$store.commit('addNewShelf', this.newShelfName.replace(/\b([a-z])/g, match => match.toUpperCase()))
-      this.newShelfName = ''
-      this.showNewShelf = false
+      let newName = this.newShelfName.replace(/\b([a-z])/g, match => match.toUpperCase())
+      if (this.shelves.indexOf(newName) > -1) {
+        console.log('Already exists')
+      } else {
+        this.$store.commit('addNewShelf', newName)
+        this.newShelfName = ''
+        this.showNewShelf = false
+      }
     }
   }
 }

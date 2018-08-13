@@ -94,6 +94,7 @@ export default {
         axios.post('http://localhost:3000/books/', {book: this.info}).then(res => {
           console.log('Book Added')
           this.$store.commit('refreshBookList')
+          this.$router.push({ name: 'Bookshelf', params: { shelfName: this.$store.state.currentShelf } })
         }, e => {
           console.log('Could not add book')
         })

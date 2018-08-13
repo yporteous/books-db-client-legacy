@@ -26,13 +26,18 @@
           <button @click="submitBook">Save changes</button>
         </td>
       </tr>
+      <tr>
+        <td></td>
+        <td class='table-delete'>
+          <button @click="deleteBook">Delete book</button>
+        </td>
+      </tr>
     </table>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-// import Vue from 'vue'
 
 export default {
   name: 'Book',
@@ -121,6 +126,13 @@ export default {
           console.log('Could not edit book')
         })
       }
+    },
+    deleteBook () {
+      axios.delete(`http://localhost:3000/books/${this.$route.params.bookId}`).then(res => {
+        console.log('Book Deleted')
+        this.$store.commit('refreshBookList')
+        this.$router.push({ name: 'Bookshelf', params: { shelfName: this.$store.state.currentShelf } })
+      })
     }
   },
   mounted () {

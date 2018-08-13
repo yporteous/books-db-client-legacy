@@ -23,6 +23,9 @@ export default new Vuex.Store({
     setCurrentShelf (state, shelf) {
       state.currentShelf = shelf
     },
+    addNewShelf (state, shelf) {
+      state.shelves.push(shelf)
+    },
     setSearchQuery (state, q) {
       state.searchQuery = q
     },

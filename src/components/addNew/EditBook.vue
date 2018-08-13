@@ -10,7 +10,15 @@
             size='40'
             type='text'
             v-model="info[field.name.toLowerCase()]"
+          />
+          <select
+            :class="{'field-error': errors[field.name.toLowerCase()]}"
+            v-else-if="field.type === 'select'"
+            v-model="info[field.name.toLowerCase()]"
           >
+            <!-- <option value=''></option> -->
+            <option v-for="shelf of shelves" :key="shelf" :value="shelf">{{shelf}}</option>
+          </select>
           <textarea
             v-else-if="field.type === 'textarea'"
             name='summary'
@@ -50,7 +58,7 @@ export default {
         { name: 'Year', type: 'text' },
         { name: 'Publisher', type: 'text' },
         { name: 'Tags', type: 'text' },
-        { name: 'Shelf', type: 'text' },
+        { name: 'Shelf', type: 'select' },
         { name: 'Summary', type: 'textarea' }
       ],
       errors: {
@@ -77,6 +85,9 @@ export default {
   computed: {
     bookId () {
       return this.$route.params.bookId
+    },
+    shelves () {
+      return this.$store.state.shelves
     }
   },
   methods: {

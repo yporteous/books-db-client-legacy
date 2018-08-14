@@ -12,6 +12,7 @@
             class='new-shelf-button'
             @click.stop='submitNew'
             :disabled='disallowSubmit'
+            :title='submitMessage'
           >Add shelf</button>
           <button class='new-shelf-button' @click.stop='showNewShelf = false'>Cancel</button>
         </div>
@@ -43,6 +44,13 @@ export default {
     disallowSubmit () {
       return !this.newShelfName.length
         || this.shelves.indexOf(this.newShelfName.replace(/\b([a-z])/g, match => match.toUpperCase())) > -1
+    },
+    submitMessage () {
+      return !this.newShelfName.length
+        ? 'Must have a name'
+        : this.shelves.indexOf(this.newShelfName.replace(/\b([a-z])/g, match => match.toUpperCase())) > -1
+          ? 'Name already exists'
+          : false
     }
   },
   methods: {

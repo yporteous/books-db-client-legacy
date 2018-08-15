@@ -8,13 +8,13 @@
         <div class='sym-plus' v-if='!showNewShelf'>+</div>
         <div class='new-shelf-fields' v-else>
           <input class='new-shelf-name' type='text' size='25' v-model='newShelfName'>
-          <button
+          <button type='button'
             class='new-shelf-button'
             @click.stop='submitNew'
             :disabled='disallowSubmit'
             :title='submitMessage'
           >Add shelf</button>
-          <button class='new-shelf-button' @click.stop='showNewShelf = false'>Cancel</button>
+          <button type='button' class='new-shelf-button' @click.stop='showNewShelf = false'>Cancel</button>
         </div>
       </div>
     </div>

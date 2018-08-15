@@ -29,7 +29,7 @@
       </tr>
       <tr>
         <td></td>
-        <td class='table-submit'><button @click="submitBook">Add Book</button></td>
+        <td class='table-submit'><button type='button' @click="submitBook">Add Book</button></td>
       </tr>
     </table>
   </div>

@@ -32,7 +32,7 @@
       </div>
     </div>
     <div class='footer'>
-      <button @click="editBook">Edit book</button>
+      <button type='button' @click="editBook">Edit book</button>
     </div>
   </div>
 </template>

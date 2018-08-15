@@ -30,14 +30,14 @@
       <tr>
         <td></td>
         <td class='table-submit'>
-          <button @click="cancel">Cancel</button>
-          <button @click="submitBook">Save changes</button>
+          <button type='button' @click="cancel">Cancel</button>
+          <button type='button' @click="submitBook">Save changes</button>
         </td>
       </tr>
       <tr>
         <td></td>
         <td class='table-delete'>
-          <button @click="deleteBook">Delete book</button>
+          <button type='button' @click="deleteBook">Delete book</button>
         </td>
       </tr>
     </table>

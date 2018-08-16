@@ -6,6 +6,7 @@ import Bookshelf from '@/components/shelf/Bookshelf'
 import BookInfo from '@/components/bookInfo/BookInfo'
 import AddBook from '@/components/addNew/AddBook'
 import EditBook from '@/components/addNew/EditBook'
+import Login from '@/components/login/Login'
 
 Vue.use(Router)
 
@@ -16,6 +17,11 @@ export default new Router({
       path: '/',
       name: 'Summary',
       component: Summary
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
     },
     {
       path: '/book/new',

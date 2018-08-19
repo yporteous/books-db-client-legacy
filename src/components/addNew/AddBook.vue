@@ -104,9 +104,13 @@ export default {
 
       // TODO: user feedback on whether books added
       if (Object.values(this.errors).indexOf(true) === -1) {
-        axios.post('http://localhost:3000/books/', {book: this.info}).then(res => {
+        axios.post('http://localhost:3000/books/', {
+          book: this.info
+        }, {
+          headers: {'x-auth': this.$store.state.authKey}
+        }).then(res => {
           console.log('Book Added')
-          this.$store.dispatch('refreshBookList')
+          this.$store.dispatch('refreshBooksList')
           this.$router.push({ name: 'Bookshelf', params: { shelfName: this.$store.state.currentShelf } })
         }, e => {
           console.log('Could not add book')

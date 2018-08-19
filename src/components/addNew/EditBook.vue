@@ -129,9 +129,13 @@ export default {
 
       // TODO: user feedback on whether books edited
       if (Object.values(this.errors).indexOf(true) === -1) {
-        axios.patch(`http://localhost:3000/books/${this.$route.params.bookId}`, {book: this.info}).then(res => {
+        axios.patch(`http://localhost:3000/books/${this.$route.params.bookId}`, {
+          book: this.info
+        }, {
+          headers: {'x-auth': this.$store.state.authKey}
+        }).then(res => {
           console.log('Book Edited')
-          this.$store.dispatch('refreshBookList')
+          this.$store.dispatch('refreshBooksList')
           this.$router.push({ name: 'Book', params: { bookId: this.bookId } })
         }, e => {
           console.log('Could not edit book')
@@ -141,14 +145,16 @@ export default {
     deleteBook () {
       axios.delete(`http://localhost:3000/books/${this.$route.params.bookId}`).then(res => {
         console.log('Book Deleted')
-        this.$store.dispatch('refreshBookList')
+        this.$store.dispatch('refreshBooksList')
         this.$router.push({ name: 'Bookshelf', params: { shelfName: this.$store.state.currentShelf } })
       })
     }
   },
   mounted () {
     axios
-      .get(`http://localhost:3000/books/${this.$route.params.bookId}`)
+      .get(`http://localhost:3000/books/${this.$route.params.bookId}`, {
+        headers: {'x-auth': this.$store.state.authKey}
+      })
       .then(res => {
         this.info = Object.assign({}, this.info, res.data)
         // this.info = res.data

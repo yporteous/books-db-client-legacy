@@ -12,12 +12,16 @@ export default {
   name: 'SummarySidebar',
   computed: {
     dataItems () {
-      return {
-        nBooks: {
+      return [
+        {
           text: 'Books',
           val: this.$store.state.books.length
+        },
+        {
+          text: 'Shelves',
+          val: this.$store.state.shelves.filter(shelf => shelf !== 'All').length
         }
-      }
+      ]
     }
   }
 }

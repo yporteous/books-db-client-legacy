@@ -19,7 +19,7 @@ export default new Vuex.Store({
       commit('getShelves')
     },
     refreshBooksList ({commit}) {
-      commit('getShelves')
+      commit('getBooks')
     },
     loadAuth ({commit}) {
       let key = localStorage.getItem('auth')
@@ -73,7 +73,7 @@ export default new Vuex.Store({
       axios.get('http://localhost:3000/books', {
         headers: {'x-auth': state.authKey}
       }).then(res => {
-        state.books = res.data
+        state.books = res.data.books
       }, e => {
         console.log(e)
       })

@@ -1,6 +1,11 @@
 <template>
   <div class='bookshelf'>
-    <Book v-for='book of filteredBooks' v-bind='book' :key='book._id'/>
+    <div class='menu'>
+      <button type='button' @click="$router.push({name: 'Add Book'})">Add new book</button>
+    </div>
+    <div class='shelf'>
+      <Book v-for='book of filteredBooks' v-bind='book' :key='book._id'/>
+    </div>
   </div>
 </template>
 
@@ -45,7 +50,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.bookshelf {
+.menu {
+  height: 27px;
+  padding-top: 5px;
+  border-bottom: 1px solid #444;
+}
+.shelf {
   display: flex;
   flex-flow: row wrap;
 }

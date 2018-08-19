@@ -10,10 +10,7 @@ export default new Vuex.Store({
     searchQuery: '',
     books: [],
     shelves: [
-      'All',
-      'Science Fiction',
-      'STEM',
-      'Fiction'
+      'All'
     ],
     currentShelf: 'All'
   },
@@ -50,8 +47,12 @@ export default new Vuex.Store({
     },
     addNewShelf (state, shelf) {
       state.shelves.push(shelf)
-      axios.post('http://localhost:3000/shelves', {shelves: state.shelves}).then(res => {
-        console.log(res)
+      axios.post('http://localhost:3000/shelves', {
+        shelves: state.shelves
+      }, {
+        headers: {'x-auth': state.authKey}
+      }).then(res => {
+        // console.log(res)
       }, e => {
         console.log(e)
       })
@@ -60,14 +61,18 @@ export default new Vuex.Store({
       state.searchQuery = q
     },
     getShelves (state) {
-      axios.get('http://localhost:3000/shelves').then(res => {
-        state.shelves = res.shelves
+      axios.get('http://localhost:3000/shelves', {
+        headers: {'x-auth': state.authKey}
+      }).then(res => {
+        state.shelves = res.data.shelves
       }, e => {
         console.log(e)
       })
     },
     getBooks (state) {
-      axios.get('http://localhost:3000/books').then(res => {
+      axios.get('http://localhost:3000/books', {
+        headers: {'x-auth': state.authKey}
+      }).then(res => {
         state.books = res.data
       }, e => {
         console.log(e)

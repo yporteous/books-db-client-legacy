@@ -12,6 +12,10 @@ export default {
   name: 'App',
   components: {
     Search
+  },
+  mounted () {
+    this.$store.dispatch('refreshShelvesList')
+    this.$store.dispatch('refreshBooksList')
   }
 }
 </script>

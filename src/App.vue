@@ -6,22 +6,12 @@
 </template>
 
 <script>
-// import axios from 'axios'
-
 import Search from './components/Search'
 
 export default {
   name: 'App',
   components: {
     Search
-  },
-  mounted () {
-    let auth = localStorage.getItem('auth')
-    if (auth) {
-      this.$store.commit('setAuthKey', auth)
-      this.$store.commit('refreshBookList')
-    }
-    //
   }
 }
 </script>

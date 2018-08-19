@@ -131,7 +131,7 @@ export default {
       if (Object.values(this.errors).indexOf(true) === -1) {
         axios.patch(`http://localhost:3000/books/${this.$route.params.bookId}`, {book: this.info}).then(res => {
           console.log('Book Edited')
-          this.$store.commit('refreshBookList')
+          this.$store.dispatch('refreshBookList')
           this.$router.push({ name: 'Book', params: { bookId: this.bookId } })
         }, e => {
           console.log('Could not edit book')
@@ -141,7 +141,7 @@ export default {
     deleteBook () {
       axios.delete(`http://localhost:3000/books/${this.$route.params.bookId}`).then(res => {
         console.log('Book Deleted')
-        this.$store.commit('refreshBookList')
+        this.$store.dispatch('refreshBookList')
         this.$router.push({ name: 'Bookshelf', params: { shelfName: this.$store.state.currentShelf } })
       })
     }

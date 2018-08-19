@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import store from '@/store'
+
 import Summary from '@/components/summary/Summary'
 import Bookshelf from '@/components/shelf/Bookshelf'
 import BookInfo from '@/components/bookInfo/BookInfo'
@@ -10,7 +12,9 @@ import Login from '@/components/login/Login'
 
 Vue.use(Router)
 
-export default new Router({
+// export default new Router({
+
+let router = new Router({
   mode: 'history',
   routes: [
     {
@@ -45,3 +49,15 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (store.state.authKey && to.path === '/login') {
+    next('/')
+  } else if (store.state.authKey || to.path === '/login') {
+    next()
+  } else {
+    next('/login')
+  }
+})
+
+export default router

@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    authKey: '',
     searchQuery: '',
     books: [],
     shelves: [
@@ -20,6 +21,9 @@ export default new Vuex.Store({
 
   },
   mutations: {
+    setAuthKey (state, key) {
+      state.authKey = key
+    },
     setCurrentShelf (state, shelf) {
       state.currentShelf = shelf
     },
@@ -28,6 +32,13 @@ export default new Vuex.Store({
     },
     setSearchQuery (state, q) {
       state.searchQuery = q
+    },
+    refreshShelvesList (state) {
+      axios.get('http://localhost:3000/shelves').then(res => {
+        state.shelves = res.shelves
+      }, e => {
+        console.log(e)
+      })
     },
     refreshBookList (state) {
       axios.get('http://localhost:3000/books').then(res => {

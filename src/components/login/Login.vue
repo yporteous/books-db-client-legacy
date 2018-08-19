@@ -69,27 +69,20 @@ export default {
   },
   methods: {
     submit () {
-      if (this.login) {
-        // axios login
-        axios
-          .post(`http://localhost:3000/users/login/`, {
+      let apiUrl = this.login
+        ? 'http://localhost:3000/users/login/'
+        : 'http://localhost:3000/users/'
+
+      axios
+        .post(apiUrl, {
+          user: {
             username: this.username,
             password: this.password
-          }).then(res => {
-            console.log(res)
-          })
-      } else {
-        // axios signup
-        axios
-          .post(`http://localhost:3000/users/`, {
-            user: {
-              username: this.username,
-              password: this.password
-            }
-          }).then(res => {
-            console.log(res)
-          })
-      }
+          }
+        }).then(res => {
+          console.log(res.headers)
+          localStorage.setItem('auth', res.headers['x-auth'])
+        })
     }
   }
 }

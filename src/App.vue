@@ -16,7 +16,12 @@ export default {
     Search
   },
   mounted () {
-    this.$store.commit('refreshBookList')
+    let auth = localStorage.getItem('auth')
+    if (auth) {
+      this.$store.commit('setAuthKey', auth)
+      this.$store.commit('refreshBookList')
+    }
+    //
   }
 }
 </script>

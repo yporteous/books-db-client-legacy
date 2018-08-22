@@ -36,6 +36,25 @@ export default new Vuex.Store({
           resolve('Key does not exist')
         })
       }
+    },
+    removeShelf ({commit, dispatch}, shelfName) {
+      commit('removeShelfFromState', shelfName)
+      dispatch('saveShelves')
+    },
+    saveNewShelf ({commit, dispatch}, newName) {
+      commit('addNewShelf', newName)
+      dispatch('saveShelves')
+    },
+    saveShelves ({commit, state}) {
+      axios.post('http://localhost:3000/shelves', {
+        shelves: state.shelves
+      }, {
+        headers: {'x-auth': state.authKey}
+      }).then(res => {
+        // console.log(res)
+      }, e => {
+        console.log(e)
+      })
     }
   },
   mutations: {
@@ -47,15 +66,10 @@ export default new Vuex.Store({
     },
     addNewShelf (state, shelf) {
       state.shelves.push(shelf)
-      axios.post('http://localhost:3000/shelves', {
-        shelves: state.shelves
-      }, {
-        headers: {'x-auth': state.authKey}
-      }).then(res => {
-        // console.log(res)
-      }, e => {
-        console.log(e)
-      })
+      state.shelves = ['All'].concat(state.shelves.slice(1).sort())
+    },
+    removeShelfFromState (state, shelfToDelete) {
+      state.shelves = state.shelves.filter(shelf => shelf !== shelfToDelete)
     },
     setSearchQuery (state, q) {
       state.searchQuery = q

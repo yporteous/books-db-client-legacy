@@ -59,7 +59,7 @@ export default {
       if (this.shelves.indexOf(newName) > -1) {
         console.log('Already exists')
       } else {
-        this.$store.commit('addNewShelf', newName)
+        this.$store.dispatch('saveNewShelf', newName)
         this.newShelfName = ''
         this.showNewShelf = false
       }

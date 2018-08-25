@@ -20,7 +20,11 @@ let router = new Router({
     {
       path: '/',
       name: 'Summary',
-      component: Summary
+      component: Summary,
+      beforeEnter: (to, from, next) => {
+        store.commit('setCurrentShelf', 'All')
+        next()
+      }
     },
     {
       path: '/login',

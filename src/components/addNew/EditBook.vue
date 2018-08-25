@@ -143,10 +143,14 @@ export default {
       }
     },
     deleteBook () {
-      axios.delete(`http://localhost:3000/books/${this.$route.params.bookId}`).then(res => {
+      axios.delete(`http://localhost:3000/books/${this.$route.params.bookId}`, {
+        headers: {'x-auth': this.$store.state.authKey}
+      }).then(res => {
         console.log('Book Deleted')
         this.$store.dispatch('refreshBooksList')
         this.$router.push({ name: 'Bookshelf', params: { shelfName: this.$store.state.currentShelf } })
+      }).catch(e => {
+        console.log(e)
       })
     }
   },

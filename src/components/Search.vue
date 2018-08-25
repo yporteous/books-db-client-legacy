@@ -9,8 +9,8 @@
         </div>
       </div>
     </div>
-    <div class='nav-item nav-link search'>
-      <input class='search-box' type='text' placeholder='Search...' v-model="searchQuery">
+    <div class='nav-item search'>
+      <input class='search-box' type='search' placeholder='Search...' v-model="searchQuery">
     </div>
   </div>
 </template>
@@ -40,6 +40,12 @@ export default {
         return this.$store.state.searchQuery
       },
       set (q) {
+        if (q && !this.$router.currentRoute.path.match(/\/bookshelf\//)) {
+          this.$router.push({
+            name: 'Bookshelf',
+            params: { shelfName: this.$store.state.currentShelf }
+          })
+        }
         this.$store.commit('setSearchQuery', q)
       }
     }
@@ -95,6 +101,7 @@ export default {
   margin: 7px 0;
   vertical-align: top;
   padding-left: 5px;
+  padding-right: 5px;
 }
 .dropdown-content {
   display: none;

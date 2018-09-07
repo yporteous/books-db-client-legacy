@@ -87,7 +87,13 @@ export default new Vuex.Store({
       axios.get('http://localhost:3000/books', {
         headers: {'x-auth': state.authKey}
       }).then(res => {
-        state.books = res.data.books
+        state.books = res.data.books.sort((a, b) => {
+          return a.author < b.author
+            ? -1
+            : b.author < a.author
+              ? 1
+              : 0
+        })
       }, e => {
         console.log(e)
       })

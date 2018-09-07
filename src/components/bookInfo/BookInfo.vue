@@ -1,12 +1,15 @@
 <template>
   <div class='book-info'>
     <div class='header'>
-      <div class='controls'>
+      <div id='controls'>
         <span style='cursor: pointer;' @click='backToShelf'>&lt;</span>
       </div>
-      <div class='header-info'>
+      <div id='header-info'>
         <h1 class='book-title'>{{info.title}}</h1>
         <h3 class='book-author'>{{info.author}}</h3>
+      </div>
+      <div id='shelf-info'>
+        <h2>{{info.shelf}}</h2>
       </div>
     </div>
     <div class='main'>
@@ -50,7 +53,8 @@ export default {
         summary: '',
         series: '',
         year: '',
-        publisher: ''
+        publisher: '',
+        shelf: ''
       }
     }
   },
@@ -96,13 +100,19 @@ export default {
 .header {
   border-bottom: 1px solid #444;
   margin-bottom: 10px;
+  display: flex;
+  flex-flow: row nowrap;
 }
 .header>div {
   display: inline-block;
   /* min-height: 120px; */
   vertical-align: top;
 }
-.controls {
+.header>div:last-child {
+  margin-left: auto;
+  margin-right: 20px;
+}
+#controls {
   margin: 10px 0;
   width: 40px;
   line-height: 40px;
@@ -116,9 +126,10 @@ export default {
   -ms-user-select: none;      /* IE 10+ */
   user-select: none;          /* Likely future */
 }
-.header-info {
+#header-info {
   border-left: 1px solid #444;
   padding-left: 10px;
+  width: 60%
 }
 .header-info>h1 {
   margin-top: 10px

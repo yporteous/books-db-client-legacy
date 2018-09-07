@@ -30,8 +30,8 @@ h1, h2 {
 }
 .book {
   box-sizing: border-box;
-  width: 150px;
-  height: 220px;
+  width: 160px;
+  height: 240px;
   border: 1px solid #888;
   margin: 10px 20px;
   padding: 10px;
@@ -40,16 +40,18 @@ h1, h2 {
   background-color: #ccc;
 }
 .summary {
-  height: 180px;
+  height: 200px;
 }
 .summary>div {
-  margin-bottom: 3px;
+  margin-bottom: 8px;
 }
 .book-title {
-  font-size: 20px;
+  font-size: 17px;
+  font-weight: bold;
 }
 .book-author {
   font-size: 13px;
+  font-style: italic;
 }
 .book-id {
   font-size: 8px;

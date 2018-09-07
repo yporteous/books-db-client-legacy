@@ -105,6 +105,7 @@ export default {
 }
 .dropdown-content {
   display: none;
+  box-sizing: border-box;
   position: absolute;
   background-color: #ccc;
   width: auto;

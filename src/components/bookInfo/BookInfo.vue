@@ -78,7 +78,6 @@ export default {
       })
       .then(res => {
         this.info = Object.assign({}, this.info, res.data)
-        // this.info = res.data
       }, e => {
         console.log(e)
       })

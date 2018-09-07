@@ -88,9 +88,11 @@ export default new Vuex.Store({
         headers: {'x-auth': state.authKey}
       }).then(res => {
         state.books = res.data.books.sort((a, b) => {
-          return a.author < b.author
+          let authA = a.author.split(' ').pop()
+          let authB = b.author.split(' ').pop()
+          return authA < authB
             ? -1
-            : b.author < a.author
+            : authA > authB
               ? 1
               : 0
         })

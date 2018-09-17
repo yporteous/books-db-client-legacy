@@ -53,7 +53,7 @@ export default {
 }
 </script>
 
-<style scoped lang="css">
+<style scoped>
 .search-bar {
   width: 100%;
   height: 40px;

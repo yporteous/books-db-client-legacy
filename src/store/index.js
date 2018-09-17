@@ -12,6 +12,9 @@ export default new Vuex.Store({
     shelves: [
       'All'
     ],
+    shelfColours: {
+      'All': '#ccc'
+    },
     currentShelf: 'All'
   },
   actions: {
@@ -46,8 +49,14 @@ export default new Vuex.Store({
       dispatch('saveShelves')
     },
     saveShelves ({commit, state}) {
+      let shelves = state.shelves.map(shelf => {
+        return {
+          name: shelf,
+          colour: state.shelfColours[shelf]
+        }
+      })
       axios.post('http://localhost:3000/shelves', {
-        shelves: state.shelves
+        shelves
       }, {
         headers: {'x-auth': state.authKey}
       }).then(res => {
@@ -65,8 +74,22 @@ export default new Vuex.Store({
       state.currentShelf = shelf
     },
     addNewShelf (state, shelf) {
-      state.shelves.push(shelf)
-      state.shelves = ['All'].concat(state.shelves.slice(1).sort())
+      state.shelves.push(shelf.name)
+
+      state.shelves.sort((a, b) => {
+        if (a === 'All') {
+          return -1
+        } else if (b === 'All') {
+          return 1
+        } else if (a < b) {
+          return -1
+        } else if (a > b) {
+          return 1
+        }
+      })
+
+      state.shelfColours[shelf.name] = shelf.colour
+      // state.shelves = ['All'].concat(state.shelves.slice(1).sort())
     },
     removeShelfFromState (state, shelfToDelete) {
       state.shelves = state.shelves.filter(shelf => shelf !== shelfToDelete)
@@ -74,11 +97,15 @@ export default new Vuex.Store({
     setSearchQuery (state, q) {
       state.searchQuery = q
     },
+    // TODO: make these action bc asynchronous
     getShelves (state) {
       axios.get('http://localhost:3000/shelves', {
         headers: {'x-auth': state.authKey}
       }).then(res => {
-        state.shelves = res.data.shelves
+        state.shelves = res.data.shelves.map(shelf => shelf.name)
+        res.data.shelves.forEach(shelf => {
+          state.shelfColours[shelf.name] = shelf.colour
+        })
       }, e => {
         console.log(e)
       })

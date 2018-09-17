@@ -3,11 +3,28 @@
     <SummarySidebar/>
     <div class='summary-main'>
       <h2>Your Bookshelves</h2>
-      <ShelfLink v-for='shelf of shelves' :key='shelf' :name='shelf'/>
+      <ShelfLink v-for='shelf of shelves' :key='shelf' :name='shelf' :colour='shelfColours[shelf]'/>
       <div class='new-shelf' @click.stop='showNewShelf = true'>
         <div class='sym-plus' v-if='!showNewShelf'>+</div>
         <div class='new-shelf-fields' v-else>
-          <input class='new-shelf-name' type='text' size='25' v-model='newShelfName'>
+          <input id='new-shelf-name' type='text' size='20' v-model='newShelfName'>
+
+          <div id='new-shelf-colour' @mouseleave="colourPicker = false" @click='colourPicker = !colourPicker'>
+            <div
+              class='colour-display'
+              :style='{backgroundColor: newShelfColour}'
+            ></div>
+            <div class='dropdown-content' :class="{'dropdown-show': colourPicker}">
+              <div
+                v-for='(colour, index) of colours'
+                :key='index'
+                class='dropdown-item'
+                :style='{backgroundColor: colour}'
+                @click.stop='newShelfColour = colour'
+                ></div>
+            </div>
+          </div>
+
           <button type='button'
             class='new-shelf-button'
             @click.stop='submitNew'
@@ -34,12 +51,26 @@ export default {
   data () {
     return {
       showNewShelf: false,
-      newShelfName: ''
+      newShelfName: '',
+      colourPicker: false,
+      newShelfColour: '#888',
+      colours: [
+        '#888',
+        '#8bf',
+        '#fba',
+        '#bf9',
+        '#9fd',
+        '#eaf',
+        '#bef'
+      ]
     }
   },
   computed: {
     shelves () {
       return this.$store.state.shelves
+    },
+    shelfColours () {
+      return this.$store.state.shelfColours
     },
     disallowSubmit () {
       return !this.newShelfName.length
@@ -59,7 +90,7 @@ export default {
       if (this.shelves.indexOf(newName) > -1) {
         console.log('Already exists')
       } else {
-        this.$store.dispatch('saveNewShelf', newName)
+        this.$store.dispatch('saveNewShelf', {name: newName, colour: this.newShelfColour})
         this.newShelfName = ''
         this.showNewShelf = false
       }
@@ -99,12 +130,15 @@ export default {
   text-align: center;
   color: white;
 }
-.new-shelf-name {
+#new-shelf-name {
   box-sizing: border-box;
   height: 30px;
   margin: 5px 0 5px -2px;
   vertical-align: top;
   font-size: 20px;
+}
+#new-shelf-colour {
+  display: inline-block;
 }
 .new-shelf-button {
   height: 30px;
@@ -113,5 +147,28 @@ export default {
 }
 .summary-heading {
   /* padding-top: 1px; */
+}
+.dropdown-content {
+  display: none;
+  box-sizing: border-box;
+  position: absolute;
+  background-color: #ccc;
+  /* width: 50px; */
+  /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+  z-index: 1;
+  flex-flow: row wrap;
+}
+.dropdown-show {
+  display: flex;
+  width: 120px;
+}
+.dropdown-item {
+  width: 15px;
+  height: 15px;
+  margin: 5px;
+}
+.colour-display {
+  width: 20px;
+  height: 20px;
 }
 </style>

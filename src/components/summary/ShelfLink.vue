@@ -1,5 +1,9 @@
 <template>
-  <div class='shelf-link' @click="goToShelf">
+  <div
+    class='shelf-link'
+    @click="goToShelf"
+    :style="{backgroundColor: colour}"
+  >
     <div class='shelf-name'>{{name}}</div>
     <div
       v-if='name != "All"'
@@ -20,7 +24,7 @@
 <script>
 export default {
   name: 'ShelfLink',
-  props: ['name'],
+  props: ['name', 'colour'],
   data () {
     return {
       showMenu: false

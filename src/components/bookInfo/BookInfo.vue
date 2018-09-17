@@ -1,15 +1,17 @@
 <template>
   <div class='book-info'>
-    <div class='header'>
+    <div id='header'>
       <div id='controls'>
         <span style='cursor: pointer;' @click='backToShelf'>&lt;</span>
       </div>
-      <div id='header-info'>
-        <h1 class='book-title'>{{info.title}}</h1>
-        <h3 class='book-author'>{{info.author}}</h3>
-      </div>
-      <div id='shelf-info'>
-        <h2>{{info.shelf}}</h2>
+      <div id='header-items' :style="{backgroundColor: shelfColour}">
+        <div id='header-info'>
+          <h1 class='book-title'>{{info.title}}</h1>
+          <h3 class='book-author'>{{info.author}}</h3>
+        </div>
+        <div id='shelf-info'>
+          <h2>{{info.shelf}}</h2>
+        </div>
       </div>
     </div>
     <div class='main'>
@@ -61,6 +63,9 @@ export default {
   computed: {
     bookId () {
       return this.$route.params.bookId
+    },
+    shelfColour () {
+      return this.$store.state.shelfColours[this.info.shelf]
     }
   },
   methods: {
@@ -88,7 +93,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .book-info {
-  margin-left: 20px;
+  /* margin: 0 20px; */
   text-align: left;
 }
 .image-placeholder {
@@ -96,18 +101,27 @@ export default {
   height: 250px;
   background-color: #444;
 }
-.header {
+#header {
   border-bottom: 1px solid #444;
+  margin-left: 0;
   margin-bottom: 10px;
   display: flex;
-  flex-flow: row nowrap;
+  width: 100%;
 }
-.header>div {
+#header-items {
+  flex-grow: 1;
+  display: inline-flex;
+  flex-flow: row nowrap;
+  /* width: calc(100% - 45px); */
+  overflow-x: hidden;
+  margin: 0;
+}
+.header-items>div {
   display: inline-block;
   /* min-height: 120px; */
   vertical-align: top;
 }
-.header>div:last-child {
+#shelf-info {
   margin-left: auto;
   margin-right: 20px;
 }
@@ -117,8 +131,8 @@ export default {
   line-height: 40px;
   height: 40px;
   font-size: 50px;
-  /* border: 1px solid #444; */
   text-align: center;
+  display: inline-block;
 
   -webkit-user-select: none;  /* Chrome all / Safari all */
   -moz-user-select: none;     /* Firefox all */
@@ -127,11 +141,14 @@ export default {
 }
 #header-info {
   border-left: 1px solid #444;
-  padding-left: 10px;
-  width: 60%
+  padding: 0 50px 0 10px;
+  /* width: 80% */
 }
 .header-info>h1 {
   margin-top: 10px
+}
+.main {
+  margin: 0 20px;
 }
 .footer {
   padding-top: 10px;

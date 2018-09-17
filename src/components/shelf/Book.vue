@@ -1,5 +1,5 @@
 <template>
-  <div class='book'>
+  <div class='book' :style="{backgroundColor: bookColour}">
     <div class='summary'>
       <div class='book-title'>{{title}}</div>
       <div class='book-author'>{{author}}</div>
@@ -14,7 +14,12 @@
 <script>
 export default {
   name: 'Book',
-  props: ['title', 'author', '_id'],
+  props: ['title', 'author', '_id', 'shelf'],
+  computed: {
+    bookColour () {
+      return this.$store.state.shelfColours[this.shelf]
+    }
+  },
   methods: {
     bookInfoPage () {
       this.$router.push({ name: 'Book', params: {'bookId': this._id} })

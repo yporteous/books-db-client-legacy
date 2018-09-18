@@ -3,7 +3,7 @@
     <SummarySidebar/>
     <div class='summary-main'>
       <h2>Your Bookshelves</h2>
-      <ShelfLink v-for='shelf of shelves' :key='shelf' :name='shelf' :colour='shelfColours[shelf]'/>
+      <ShelfLink v-for='shelf of shelves' :key='shelf' :name='shelf'/>
       <div class='new-shelf' @click.stop='showNewShelf = true'>
         <div class='sym-plus' v-if='!showNewShelf'>+</div>
         <div class='new-shelf-fields' v-else>
@@ -53,19 +53,13 @@ export default {
       showNewShelf: false,
       newShelfName: '',
       colourPicker: false,
-      newShelfColour: '#888',
-      colours: [
-        '#888',
-        '#8bf',
-        '#fba',
-        '#bf9',
-        '#9fd',
-        '#eaf',
-        '#bef'
-      ]
+      newShelfColour: '#888'
     }
   },
   computed: {
+    colours () {
+      return this.$store.state.colours
+    },
     shelves () {
       return this.$store.state.shelves
     },

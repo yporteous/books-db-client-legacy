@@ -9,6 +9,15 @@ export default new Vuex.Store({
     authKey: '',
     searchQuery: '',
     books: [],
+    colours: [
+      '#888',
+      '#8bf',
+      '#fba',
+      '#bf9',
+      '#9fd',
+      '#eaf',
+      '#bef'
+    ],
     shelves: [
       'All'
     ],
@@ -44,8 +53,12 @@ export default new Vuex.Store({
       commit('removeShelfFromState', shelfName)
       dispatch('saveShelves')
     },
-    saveNewShelf ({commit, dispatch}, newName) {
-      commit('addNewShelf', newName)
+    saveNewShelf ({commit, dispatch}, newShelf) {
+      commit('addNewShelf', newShelf)
+      dispatch('saveShelves')
+    },
+    updateShelf ({commit, dispatch}, payload) {
+      commit('editShelf', payload)
       dispatch('saveShelves')
     },
     saveShelves ({commit, state}) {
@@ -88,8 +101,10 @@ export default new Vuex.Store({
         }
       })
 
-      state.shelfColours[shelf.name] = shelf.colour
-      // state.shelves = ['All'].concat(state.shelves.slice(1).sort())
+      Vue.set(state.shelfColours, shelf.name, shelf.colour)
+    },
+    editShelf (state, shelf) {
+      Vue.set(state.shelfColours, shelf.name, shelf.colour)
     },
     removeShelfFromState (state, shelfToDelete) {
       state.shelves = state.shelves.filter(shelf => shelf !== shelfToDelete)
@@ -104,7 +119,7 @@ export default new Vuex.Store({
       }).then(res => {
         state.shelves = res.data.shelves.map(shelf => shelf.name)
         res.data.shelves.forEach(shelf => {
-          state.shelfColours[shelf.name] = shelf.colour
+          Vue.set(state.shelfColours, shelf.name, shelf.colour)
         })
       }, e => {
         console.log(e)

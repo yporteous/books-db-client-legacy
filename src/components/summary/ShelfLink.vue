@@ -16,6 +16,15 @@
         <div class='dropdown-link' @click='removeShelf'>
           <span class='dropdown-text'>Remove shelf</span>
         </div>
+        <div id='colour-picker' class='dropdown-link'>
+          <div
+            v-for='(colour, index) of colours'
+            :key='index'
+            class='colour-item'
+            :style='{backgroundColor: colour}'
+            @click.stop='setColour(colour)'
+            ></div>
+        </div>
       </div>
     </div>
   </div>
@@ -24,15 +33,21 @@
 <script>
 export default {
   name: 'ShelfLink',
-  props: ['name', 'colour'],
+  props: ['name'],
   data () {
     return {
       showMenu: false
     }
   },
   computed: {
+    colour () {
+      return this.$store.state.shelfColours[this.name]
+    },
     path () {
       return this.name.replace(/ /g, '_')
+    },
+    colours () {
+      return this.$store.state.colours
     }
   },
   methods: {
@@ -44,6 +59,10 @@ export default {
     },
     removeShelf () {
       this.$store.dispatch('removeShelf', this.name)
+    },
+    setColour (newColour) {
+      let shelf = {name: this.name, colour: newColour}
+      this.$store.dispatch('updateShelf', shelf)
     }
   }
 }
@@ -75,17 +94,34 @@ export default {
   width: auto;
   min-width: 150px;
   max-height: 420px;
+  height: auto;
   overflow-y: auto;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
 .dropdown-show {
-  display: block;
+  display: flex;
+  flex-flow: column nowrap;
 }
 .dropdown-link {
   text-align: center;
   height: 30px;
   line-height: 30px;
   font-size: 15px;
+  border-bottom: 1px solid #444;
+}
+.dropdown-link:last-child {
+  border-bottom: none;
+}
+#colour-picker {
+  display: flex;
+  max-width: 150px;
+  flex-flow: row wrap;
+  height: auto;
+}
+.colour-item {
+  width: 15px;
+  height: 15px;
+  margin: 5px;
 }
 </style>

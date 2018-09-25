@@ -79,6 +79,7 @@ export default {
           }).then(res => {
             console.log(res.headers)
             localStorage.setItem('auth', res.headers['x-auth'])
+            this.$router.push({ name: 'Summary' })
           })
       } else {
         axios
@@ -91,6 +92,7 @@ export default {
           }).then(res => {
             console.log(res.headers)
             localStorage.setItem('auth', res.headers['x-auth'])
+            this.$router.push({ name: 'Summary' })
           })
       }
     }

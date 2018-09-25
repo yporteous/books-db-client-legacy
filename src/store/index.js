@@ -27,7 +27,7 @@ export default new Vuex.Store({
       'All': '#ccc'
     },
     currentShelf: 'All',
-    url: 'http://localhost:3000/'
+    url: 'https://quiet-woodland-63691.herokuapp.com/'
   },
   actions: {
     refreshShelvesList ({commit}) {

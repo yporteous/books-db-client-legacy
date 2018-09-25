@@ -4,6 +4,8 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
+// 'https://mighty-river-48399.herokuapp.com/'
+
 export default new Vuex.Store({
   state: {
     authKey: '',
@@ -24,7 +26,8 @@ export default new Vuex.Store({
     shelfColours: {
       'All': '#ccc'
     },
-    currentShelf: 'All'
+    currentShelf: 'All',
+    url: 'http://localhost:3000/'
   },
   actions: {
     refreshShelvesList ({commit}) {
@@ -33,10 +36,10 @@ export default new Vuex.Store({
     refreshBooksList ({commit}) {
       commit('getBooks')
     },
-    loadAuth ({commit}) {
+    loadAuth ({state, commit}) {
       let key = localStorage.getItem('auth')
       if (key) {
-        return axios.get('http://localhost:3000/users/me', {
+        return axios.get(state.url + 'users/me', {
           headers: {'x-auth': key}
         }).then(res => {
           commit('setAuthKey', key)
@@ -68,7 +71,7 @@ export default new Vuex.Store({
           colour: state.shelfColours[shelf]
         }
       })
-      axios.post('http://localhost:3000/shelves', {
+      axios.post(state.url + 'shelves', {
         shelves
       }, {
         headers: {'x-auth': state.authKey}
@@ -114,7 +117,7 @@ export default new Vuex.Store({
     },
     // TODO: make these action bc asynchronous
     getShelves (state) {
-      axios.get('http://localhost:3000/shelves', {
+      axios.get(state.url + 'shelves', {
         headers: {'x-auth': state.authKey}
       }).then(res => {
         state.shelves = res.data.shelves.map(shelf => shelf.name)
@@ -126,7 +129,7 @@ export default new Vuex.Store({
       })
     },
     getBooks (state) {
-      axios.get('http://localhost:3000/books', {
+      axios.get(state.url + 'books', {
         headers: {'x-auth': state.authKey}
       }).then(res => {
         state.books = res.data.books.sort((a, b) => {

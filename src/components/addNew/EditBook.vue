@@ -129,7 +129,7 @@ export default {
 
       // TODO: user feedback on whether books edited
       if (Object.values(this.errors).indexOf(true) === -1) {
-        axios.patch(`http://localhost:3000/books/${this.$route.params.bookId}`, {
+        axios.patch(`${this.$store.state.url}books/${this.$route.params.bookId}`, {
           book: this.info
         }, {
           headers: {'x-auth': this.$store.state.authKey}
@@ -143,7 +143,7 @@ export default {
       }
     },
     deleteBook () {
-      axios.delete(`http://localhost:3000/books/${this.$route.params.bookId}`, {
+      axios.delete(`${this.$store.state.url}books/${this.$route.params.bookId}`, {
         headers: {'x-auth': this.$store.state.authKey}
       }).then(res => {
         console.log('Book Deleted')
@@ -156,7 +156,7 @@ export default {
   },
   mounted () {
     axios
-      .get(`http://localhost:3000/books/${this.$route.params.bookId}`, {
+      .get(`${this.$store.state.url}books/${this.$route.params.bookId}`, {
         headers: {'x-auth': this.$store.state.authKey}
       })
       .then(res => {

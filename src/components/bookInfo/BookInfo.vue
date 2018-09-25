@@ -78,7 +78,7 @@ export default {
   },
   mounted () {
     axios
-      .get(`http://localhost:3000/books/${this.bookId}`, {
+      .get(`${this.$store.state.url}books/${this.bookId}`, {
         headers: {'x-auth': this.$store.state.authKey}
       })
       .then(res => {

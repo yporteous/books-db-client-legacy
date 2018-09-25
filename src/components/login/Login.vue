@@ -71,7 +71,7 @@ export default {
     submit () {
       if (this.login) {
         axios
-          .post('http://localhost:3000/users/login/', {
+          .post(this.$store.state.url + 'users/login/', {
             user: {
               username: this.username,
               password: this.password
@@ -82,7 +82,7 @@ export default {
           })
       } else {
         axios
-          .post('http://localhost:3000/users/', {
+          .post(this.$store.state.url + 'users/', {
             user: {
               username: this.username,
               password: this.password,

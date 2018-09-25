@@ -104,7 +104,7 @@ export default {
 
       // TODO: user feedback on whether books added
       if (Object.values(this.errors).indexOf(true) === -1) {
-        axios.post('http://localhost:3000/books/', {
+        axios.post(this.$store.state.url + 'books/', {
           book: this.info
         }, {
           headers: {'x-auth': this.$store.state.authKey}

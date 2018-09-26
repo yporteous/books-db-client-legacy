@@ -31,6 +31,10 @@ export default new Vuex.Store({
     url: 'http://localhost:3000/'
   },
   actions: {
+    refreshAll ({commit}) {
+      commit('getShelves')
+      commit('getBooks')
+    },
     refreshShelvesList ({commit}) {
       commit('getShelves')
     },

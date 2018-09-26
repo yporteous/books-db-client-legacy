@@ -79,7 +79,9 @@ export default {
           }
         }).then(res => {
           console.log(res.headers)
-          localStorage.setItem('auth', res.headers['x-auth'] || res.headers['X-Auth'])
+          localStorage.setItem('auth', res.headers['x-auth'])
+          this.$store.commit('setAuthKey', res.headers['x-auth'])
+          this.$store.dispatch('refreshAll')
           this.$router.push({ name: 'Summary' })
         })
     }

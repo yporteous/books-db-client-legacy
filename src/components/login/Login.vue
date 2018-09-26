@@ -69,32 +69,19 @@ export default {
   },
   methods: {
     submit () {
-      if (this.login) {
-        axios
-          .post(this.$store.state.url + 'users/login/', {
-            user: {
-              username: this.username,
-              password: this.password
-            }
-          }).then(res => {
-            console.log(res.headers)
-            localStorage.setItem('auth', res.headers['X-Auth'])
-            this.$router.push({ name: 'Summary' })
-          })
-      } else {
-        // user shelves: {name: 'All', colour: '#ccc'}
-        axios
-          .post(this.$store.state.url + 'users/', {
-            user: {
-              username: this.username,
-              password: this.password
-            }
-          }).then(res => {
-            console.log(res.headers)
-            localStorage.setItem('auth', res.headers['X-Auth'])
-            this.$router.push({ name: 'Summary' })
-          })
-      }
+      let requestURL = this.$store.state.url + 'users/' + (this.login ? 'login/' : '')
+
+      axios
+        .post(requestURL, {
+          user: {
+            username: this.username,
+            password: this.password
+          }
+        }).then(res => {
+          console.log(res.headers)
+          localStorage.setItem('auth', res.headers['x-auth'] || res.headers['X-Auth'])
+          this.$router.push({ name: 'Summary' })
+        })
     }
   }
 }

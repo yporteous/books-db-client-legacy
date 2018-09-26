@@ -78,20 +78,20 @@ export default {
             }
           }).then(res => {
             console.log(res.headers)
-            localStorage.setItem('auth', res.headers['x-auth'])
+            localStorage.setItem('auth', res.headers['X-Auth'])
             this.$router.push({ name: 'Summary' })
           })
       } else {
+        // user shelves: {name: 'All', colour: '#ccc'}
         axios
           .post(this.$store.state.url + 'users/', {
             user: {
               username: this.username,
-              password: this.password,
-              shelves: [{name: 'All', colour: '#ccc'}]
+              password: this.password
             }
           }).then(res => {
             console.log(res.headers)
-            localStorage.setItem('auth', res.headers['x-auth'])
+            localStorage.setItem('auth', res.headers['X-Auth'])
             this.$router.push({ name: 'Summary' })
           })
       }

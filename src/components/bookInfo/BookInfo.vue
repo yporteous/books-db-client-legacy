@@ -79,7 +79,7 @@ export default {
   mounted () {
     axios
       .get(`${this.$store.state.url}books/${this.bookId}`, {
-        headers: {'x-auth': this.$store.state.authKey}
+        headers: {'X-Auth': this.$store.state.authKey}
       })
       .then(res => {
         this.info = Object.assign({}, this.info, res.data)

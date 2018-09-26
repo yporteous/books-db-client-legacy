@@ -107,7 +107,7 @@ export default {
         axios.post(this.$store.state.url + 'books/', {
           book: this.info
         }, {
-          headers: {'x-auth': this.$store.state.authKey}
+          headers: {'X-Auth': this.$store.state.authKey}
         }).then(res => {
           console.log('Book Added')
           this.$store.dispatch('refreshBooksList')

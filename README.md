@@ -1,6 +1,6 @@
 # library-db-client
 
-> A Vue.js project
+This is a web client for the [Library REST API](https://github.com/yporteous/books-db-server). It is created with Vue.js, and allows adding, editing and removing books and shelves.
 
 ## Build Setup
 
